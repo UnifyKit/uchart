@@ -1,0 +1,42 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script>
+        window.requestAnimFrame = (function () {
+            return window.requestAnimationFrame ||
+                    window.webkitRequestAnimationFrame ||
+                    window.mozRequestAnimationFrame ||
+                    window.oRequestAnimationFrame ||
+                    window.msRequestAnimationFrame ||
+                    function (callback) {
+                        window.setTimeout(callback, 1000 / 60);
+                    };
+        })();
+
+        function animate(element, name, from, to, time) {
+            time = time || 800;
+            var style = element.style,
+            startTime = new Date;
+            function go(timestamp) {
+                var progress = timestamp - startTime;
+                if (progress >= duration) {
+                    style[name] = to + 'px';
+                    return;
+                }
+                var now = (to - from) * (progress / duration);
+                style[name] = now.toFixed() + 'px';
+                requestAnimationFrame(go);
+            }
+            style[name] = from + 'px';
+            requestAnimationFrame(go);
+        }
+
+        requestAnimationFrame(function () {
+            alert("DSDFSD");
+        });
+    </script>
+</head>
+<body>
+</body>
+</html>
